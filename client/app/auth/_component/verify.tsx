@@ -1,7 +1,19 @@
 import { Button } from '@/components/ui/button'
-import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormMessage,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@/components/ui/input-otp'
+import {
+	InputOTP,
+	InputOTPGroup,
+	InputOTPSeparator,
+	InputOTPSlot,
+} from '@/components/ui/input-otp'
+import { useAuth } from '@/hooks/use-auth'
 import { otpSchema } from '@/lib/validation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Label } from '@radix-ui/react-label'
@@ -10,13 +22,17 @@ import { useForm } from 'react-hook-form'
 import z from 'zod'
 
 const Verify = () => {
+	const { email } = useAuth()
+
 	const form = useForm<z.infer<typeof otpSchema>>({
 		resolver: zodResolver(otpSchema),
-		defaultValues: { email: '', otp: '	' },
+		defaultValues: { email, otp: '	' },
 	})
 
 	function onSubmit(values: z.infer<typeof otpSchema>) {
+		// API call to verify otp
 		console.log(values)
+		window.open('/', '_self')
 	}
 	return (
 		<div className='w-full'>
@@ -40,6 +56,7 @@ const Verify = () => {
 										placeholder='info@md.hu'
 										className='h-10 bg-secondary'
 										{...field}
+										disabled
 									/>
 								</FormControl>
 								<FormMessage className='text-xs text-red-500' />
