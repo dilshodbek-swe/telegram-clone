@@ -5,8 +5,8 @@ import Settings from './setting'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import useCurrentContact from '@/hooks/use-current'
 import { useRouter } from 'next/navigation'
+import { useCurrentContact } from '@/hooks/use-current'
 
 interface Props {
 	contacts: IUser[]
